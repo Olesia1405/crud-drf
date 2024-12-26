@@ -1,1 +1,26 @@
+name: Django cicd
 
+on:
+  push:
+    branches: [main]
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    env:
+      PG_NAME: ${{ secret.PG_NAME }}
+      PG_USER: ${{ secret.PG_USER }}
+      PG_PASSWORD: ${{ secret.PG_PASSWORD }}
+      PG_HOST: ${{ secret.PG_HOST }}
+      PG_PORT: ${{ secret.PG_PORT }}
+
+    steps:
+      - name: Проверка изменений
+        uses: actions/checkout@v2
+
+      - name: Установка python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Command
+        run: ls -la
